@@ -16,6 +16,78 @@ namespace BusCore.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.1.4-rtm-31024");
 
+            modelBuilder.Entity("BusCore.Repository.Entities.Model.RelatorioBuracos", b =>
+                {
+                    b.Property<int>("RelBuracoID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("DataHora");
+
+                    b.Property<int?>("LinhaID");
+
+                    b.Property<int>("NumBuracos");
+
+                    b.HasKey("RelBuracoID");
+
+                    b.HasIndex("LinhaID");
+
+                    b.ToTable("RelatorioBuraco");
+                });
+
+            modelBuilder.Entity("BusCore.Repository.Entities.Model.RelatorioLombadas", b =>
+                {
+                    b.Property<int>("RelLombadaID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("DataHora");
+
+                    b.Property<int?>("LinhaID");
+
+                    b.Property<int>("NumLombadas");
+
+                    b.HasKey("RelLombadaID");
+
+                    b.HasIndex("LinhaID");
+
+                    b.ToTable("RelatorioLombada");
+                });
+
+            modelBuilder.Entity("BusCore.Repository.Entities.Model.RelatorioParadas", b =>
+                {
+                    b.Property<int>("RelParadaID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("DataHora");
+
+                    b.Property<int?>("LinhaID");
+
+                    b.Property<int>("NumParadas");
+
+                    b.HasKey("RelParadaID");
+
+                    b.HasIndex("LinhaID");
+
+                    b.ToTable("RelatorioParada");
+                });
+
+            modelBuilder.Entity("BusCore.Repository.Entities.Model.RelatorioSemaforos", b =>
+                {
+                    b.Property<int>("RelSemaforoID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("DataHora");
+
+                    b.Property<int?>("LinhaID");
+
+                    b.Property<int>("NumSemaforos");
+
+                    b.HasKey("RelSemaforoID");
+
+                    b.HasIndex("LinhaID");
+
+                    b.ToTable("RelatorioSemaforo");
+                });
+
             modelBuilder.Entity("BusProj.Repository.Entities.Model.Deteccao", b =>
                 {
                     b.Property<int>("DetecaoTipoId")
@@ -43,11 +115,13 @@ namespace BusCore.Migrations
 
                     b.Property<int?>("OcorrenciaID");
 
-                    b.Property<int>("RPNTotal");
+                    b.Property<int>("RPNEmgreagemCalculado");
 
                     b.Property<int?>("SeveridadeID");
 
                     b.Property<int?>("TipoDescricaoID");
+
+                    b.Property<DateTime>("dataHora");
 
                     b.HasKey("EmbreagemID");
 
@@ -75,11 +149,13 @@ namespace BusCore.Migrations
 
                     b.Property<int?>("OcorrenciaID");
 
-                    b.Property<int>("RPNTotal");
+                    b.Property<int>("RPNFreioCalculado");
 
                     b.Property<int?>("SeveridadeID");
 
                     b.Property<int?>("TipoDescricaoID");
+
+                    b.Property<DateTime>("dataHora");
 
                     b.HasKey("FreioID");
 
@@ -165,11 +241,13 @@ namespace BusCore.Migrations
 
                     b.Property<int?>("OcorrenciaID");
 
-                    b.Property<int>("RPNTotal");
+                    b.Property<int>("RPNSuspensaoCalculado");
 
                     b.Property<int?>("SeveridadeID");
 
                     b.Property<int?>("TipoDescricaoID");
+
+                    b.Property<DateTime>("dataHora");
 
                     b.HasKey("SuspensaoID");
 
@@ -196,6 +274,34 @@ namespace BusCore.Migrations
                     b.HasKey("TipoDescricaoID");
 
                     b.ToTable("TipoDescricao");
+                });
+
+            modelBuilder.Entity("BusCore.Repository.Entities.Model.RelatorioBuracos", b =>
+                {
+                    b.HasOne("BusProj.Repository.Entities.Model.Linha", "LinhaIDCE")
+                        .WithMany()
+                        .HasForeignKey("LinhaID");
+                });
+
+            modelBuilder.Entity("BusCore.Repository.Entities.Model.RelatorioLombadas", b =>
+                {
+                    b.HasOne("BusProj.Repository.Entities.Model.Linha", "LinhaIDCE")
+                        .WithMany()
+                        .HasForeignKey("LinhaID");
+                });
+
+            modelBuilder.Entity("BusCore.Repository.Entities.Model.RelatorioParadas", b =>
+                {
+                    b.HasOne("BusProj.Repository.Entities.Model.Linha", "LinhaIDCE")
+                        .WithMany()
+                        .HasForeignKey("LinhaID");
+                });
+
+            modelBuilder.Entity("BusCore.Repository.Entities.Model.RelatorioSemaforos", b =>
+                {
+                    b.HasOne("BusProj.Repository.Entities.Model.Linha", "LinhaIDCE")
+                        .WithMany()
+                        .HasForeignKey("LinhaID");
                 });
 
             modelBuilder.Entity("BusProj.Repository.Entities.Model.Embreagem", b =>

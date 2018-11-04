@@ -21,8 +21,9 @@ namespace BusProj.Repository.Entities.Model
         [ForeignKey("TipoDescricaoID")]
         public virtual TipoDescricao DescricaoTipo { get; set; }
         //ocorrecia* severidade * deteccao
-        public int RPNTotal { get; set; }
+        public int RPNEmgreagemCalculado { get; set; }
         [ForeignKey("LinhaID")]
         public virtual Linha LinhaIDCE { get; set; }
+        public DateTime dataHora { get; set; }
     }
 }
