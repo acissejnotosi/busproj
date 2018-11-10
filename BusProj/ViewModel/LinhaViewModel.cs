@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-
-namespace BusProj.Repository.Entities.Model
+﻿namespace BusCore.ViewModel
 {
-    public class Linha
+    public class LinhaViewModel
     {
-        [Key]
-        public int LinhaID { get; set; }
+        public int LinhaId { get; set; }
         public int NumeroLinha { get; set; }
         public string NomeLinha { get; set; }
         public int NumParadas { get; set; }
@@ -18,6 +12,5 @@ namespace BusProj.Repository.Entities.Model
         public double Peso { get; set; }
         public double TotalRPNFabrica { get; set; }
         public double RPNCalculado { get; set; }
-
     }
 }

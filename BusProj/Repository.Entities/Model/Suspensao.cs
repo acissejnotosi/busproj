@@ -24,6 +24,6 @@ namespace BusProj.Repository.Entities.Model
         public int RPNSuspensaoCalculado { get; set; }
         [ForeignKey("LinhaID")]
         public virtual Linha LinhaIDCE { get; set; }
-        public DateTime dataHora { get; set; }
+        public DateTime DataHora { get; set; }
     }
 }

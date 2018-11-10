@@ -3,25 +3,27 @@ using System;
 using BusProj.Repository.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BusCore.Migrations
 {
-    [DbContext(typeof(DatabaseContext))]
-    [Migration("20181104041158_InitialCreate")]
-    partial class InitialCreate
+    [DbContext(typeof(BusCoreContext))]
+    partial class BusCoreContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024");
+                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("BusCore.Repository.Entities.Model.RelatorioBuracos", b =>
                 {
                     b.Property<int>("RelBuracoID")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("DataHora");
 
@@ -39,7 +41,8 @@ namespace BusCore.Migrations
             modelBuilder.Entity("BusCore.Repository.Entities.Model.RelatorioLombadas", b =>
                 {
                     b.Property<int>("RelLombadaID")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("DataHora");
 
@@ -57,7 +60,8 @@ namespace BusCore.Migrations
             modelBuilder.Entity("BusCore.Repository.Entities.Model.RelatorioParadas", b =>
                 {
                     b.Property<int>("RelParadaID")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("DataHora");
 
@@ -75,7 +79,8 @@ namespace BusCore.Migrations
             modelBuilder.Entity("BusCore.Repository.Entities.Model.RelatorioSemaforos", b =>
                 {
                     b.Property<int>("RelSemaforoID")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("DataHora");
 
@@ -93,7 +98,8 @@ namespace BusCore.Migrations
             modelBuilder.Entity("BusProj.Repository.Entities.Model.Deteccao", b =>
                 {
                     b.Property<int>("DetecaoTipoId")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("FaixasCriteriosDeteccao");
 
@@ -109,7 +115,10 @@ namespace BusCore.Migrations
             modelBuilder.Entity("BusProj.Repository.Entities.Model.Embreagem", b =>
                 {
                     b.Property<int>("EmbreagemID")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DataHora");
 
                     b.Property<int?>("DeteccaoID");
 
@@ -117,13 +126,11 @@ namespace BusCore.Migrations
 
                     b.Property<int?>("OcorrenciaID");
 
-                    b.Property<int>("RPNEmgreagemCalculado");
+                    b.Property<int>("RPNEmbreagemCalculado");
 
                     b.Property<int?>("SeveridadeID");
 
                     b.Property<int?>("TipoDescricaoID");
-
-                    b.Property<DateTime>("dataHora");
 
                     b.HasKey("EmbreagemID");
 
@@ -143,7 +150,10 @@ namespace BusCore.Migrations
             modelBuilder.Entity("BusProj.Repository.Entities.Model.Freio", b =>
                 {
                     b.Property<int>("FreioID")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DataHora");
 
                     b.Property<int?>("DeteccaoID");
 
@@ -156,8 +166,6 @@ namespace BusCore.Migrations
                     b.Property<int?>("SeveridadeID");
 
                     b.Property<int?>("TipoDescricaoID");
-
-                    b.Property<DateTime>("dataHora");
 
                     b.HasKey("FreioID");
 
@@ -177,7 +185,8 @@ namespace BusCore.Migrations
             modelBuilder.Entity("BusProj.Repository.Entities.Model.Linha", b =>
                 {
                     b.Property<int>("LinhaID")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("NomeLinha");
 
@@ -189,11 +198,13 @@ namespace BusCore.Migrations
 
                     b.Property<int>("NumSemnaforo");
 
+                    b.Property<int>("NumeroLinha");
+
                     b.Property<double>("Peso");
 
                     b.Property<double>("RPNCalculado");
 
-                    b.Property<double>("RPNFabrica");
+                    b.Property<double>("TotalRPNFabrica");
 
                     b.HasKey("LinhaID");
 
@@ -203,7 +214,8 @@ namespace BusCore.Migrations
             modelBuilder.Entity("BusProj.Repository.Entities.Model.Ocorrencia", b =>
                 {
                     b.Property<int>("OcorrenciaId")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("IndiceOcorrencia");
 
@@ -219,7 +231,8 @@ namespace BusCore.Migrations
             modelBuilder.Entity("BusProj.Repository.Entities.Model.Severidade", b =>
                 {
                     b.Property<int>("SeveridadeId")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("EfeitoDaSeveridade");
 
@@ -235,7 +248,10 @@ namespace BusCore.Migrations
             modelBuilder.Entity("BusProj.Repository.Entities.Model.Suspensao", b =>
                 {
                     b.Property<int>("SuspensaoID")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DataHora");
 
                     b.Property<int?>("DeteccaoID");
 
@@ -248,8 +264,6 @@ namespace BusCore.Migrations
                     b.Property<int?>("SeveridadeID");
 
                     b.Property<int?>("TipoDescricaoID");
-
-                    b.Property<DateTime>("dataHora");
 
                     b.HasKey("SuspensaoID");
 
@@ -269,7 +283,8 @@ namespace BusCore.Migrations
             modelBuilder.Entity("BusProj.Repository.Entities.Model.TipoDescricao", b =>
                 {
                     b.Property<int>("TipoDescricaoID")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Descricao");
 

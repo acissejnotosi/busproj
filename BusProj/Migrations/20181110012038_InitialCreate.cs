@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BusCore.Migrations
@@ -12,7 +13,7 @@ namespace BusCore.Migrations
                 columns: table => new
                 {
                     DetecaoTipoId = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ProbabilidadeDeteccao = table.Column<string>(nullable: true),
                     FaixasCriteriosDeteccao = table.Column<string>(nullable: true),
                     IndiceDeteccao = table.Column<int>(nullable: false)
@@ -27,14 +28,15 @@ namespace BusCore.Migrations
                 columns: table => new
                 {
                     LinhaID = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    NumeroLinha = table.Column<int>(nullable: false),
                     NomeLinha = table.Column<string>(nullable: true),
                     NumParadas = table.Column<int>(nullable: false),
                     NumBuracos = table.Column<int>(nullable: false),
                     NumLomnbadas = table.Column<int>(nullable: false),
                     NumSemnaforo = table.Column<int>(nullable: false),
                     Peso = table.Column<double>(nullable: false),
-                    RPNFabrica = table.Column<double>(nullable: false),
+                    TotalRPNFabrica = table.Column<double>(nullable: false),
                     RPNCalculado = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
@@ -47,7 +49,7 @@ namespace BusCore.Migrations
                 columns: table => new
                 {
                     OcorrenciaId = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Probabilidade = table.Column<string>(nullable: true),
                     TaxasFalhasPossiveis = table.Column<string>(nullable: true),
                     IndiceOcorrencia = table.Column<int>(nullable: false)
@@ -62,7 +64,7 @@ namespace BusCore.Migrations
                 columns: table => new
                 {
                     SeveridadeId = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     SeveridadeTipo = table.Column<string>(nullable: true),
                     EfeitoDaSeveridade = table.Column<string>(nullable: true),
                     IndiceSeveridade = table.Column<int>(nullable: false)
@@ -77,7 +79,7 @@ namespace BusCore.Migrations
                 columns: table => new
                 {
                     TipoDescricaoID = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Descricao = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -90,7 +92,7 @@ namespace BusCore.Migrations
                 columns: table => new
                 {
                     RelBuracoID = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     NumBuracos = table.Column<int>(nullable: false),
                     DataHora = table.Column<DateTime>(nullable: false),
                     LinhaID = table.Column<int>(nullable: true)
@@ -111,7 +113,7 @@ namespace BusCore.Migrations
                 columns: table => new
                 {
                     RelLombadaID = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     NumLombadas = table.Column<int>(nullable: false),
                     DataHora = table.Column<DateTime>(nullable: false),
                     LinhaID = table.Column<int>(nullable: true)
@@ -132,7 +134,7 @@ namespace BusCore.Migrations
                 columns: table => new
                 {
                     RelParadaID = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     NumParadas = table.Column<int>(nullable: false),
                     DataHora = table.Column<DateTime>(nullable: false),
                     LinhaID = table.Column<int>(nullable: true)
@@ -153,7 +155,7 @@ namespace BusCore.Migrations
                 columns: table => new
                 {
                     RelSemaforoID = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     NumSemaforos = table.Column<int>(nullable: false),
                     DataHora = table.Column<DateTime>(nullable: false),
                     LinhaID = table.Column<int>(nullable: true)
@@ -174,14 +176,14 @@ namespace BusCore.Migrations
                 columns: table => new
                 {
                     EmbreagemID = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     OcorrenciaID = table.Column<int>(nullable: true),
                     SeveridadeID = table.Column<int>(nullable: true),
                     DeteccaoID = table.Column<int>(nullable: true),
                     TipoDescricaoID = table.Column<int>(nullable: true),
-                    RPNEmgreagemCalculado = table.Column<int>(nullable: false),
+                    RPNEmbreagemCalculado = table.Column<int>(nullable: false),
                     LinhaID = table.Column<int>(nullable: true),
-                    dataHora = table.Column<DateTime>(nullable: false)
+                    DataHora = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -223,14 +225,14 @@ namespace BusCore.Migrations
                 columns: table => new
                 {
                     FreioID = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     OcorrenciaID = table.Column<int>(nullable: true),
                     SeveridadeID = table.Column<int>(nullable: true),
                     DeteccaoID = table.Column<int>(nullable: true),
                     TipoDescricaoID = table.Column<int>(nullable: true),
                     RPNFreioCalculado = table.Column<int>(nullable: false),
                     LinhaID = table.Column<int>(nullable: true),
-                    dataHora = table.Column<DateTime>(nullable: false)
+                    DataHora = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -272,14 +274,14 @@ namespace BusCore.Migrations
                 columns: table => new
                 {
                     SuspensaoID = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     OcorrenciaID = table.Column<int>(nullable: true),
                     SeveridadeID = table.Column<int>(nullable: true),
                     DeteccaoID = table.Column<int>(nullable: true),
                     TipoDescricaoID = table.Column<int>(nullable: true),
                     RPNSuspensaoCalculado = table.Column<int>(nullable: false),
                     LinhaID = table.Column<int>(nullable: true),
-                    dataHora = table.Column<DateTime>(nullable: false)
+                    DataHora = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {

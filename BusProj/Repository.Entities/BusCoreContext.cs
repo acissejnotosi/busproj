@@ -5,8 +5,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BusProj.Repository.Entities
 {
-    public class DatabaseContext : DbContext
+    public class BusCoreContext : DbContext
     {
+        public BusCoreContext() : base()
+        {
+
+        }
+
         public DbSet<Deteccao> Deteccao { get; set; }
         public DbSet<Embreagem> Embreagem { get; set; }
         public DbSet<Freio> Freio { get; set; }
@@ -19,11 +24,10 @@ namespace BusProj.Repository.Entities
         public DbSet<RelatorioLombadas> RelatorioLombada { get; set; }
         public DbSet<RelatorioParadas> RelatorioParada { get; set; }
         public DbSet<RelatorioSemaforos> RelatorioSemaforo { get; set; }
-
-
+        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=bus.db");
+            optionsBuilder.UseSqlServer("Data Source=CIBIEN-PC\\CIBIEN;Initial Catalog=BusCore;Persist Security Info=True;User ID=sa;Password=teste");
         }
     }
 }
