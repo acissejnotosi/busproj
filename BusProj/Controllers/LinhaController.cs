@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using BusCore.ViewModel;
+using BusCore.Model;
 using BusProj.Repository.Entities;
 using BusProj.Repository.Entities.Model;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -69,10 +67,28 @@ namespace BusCore.Controllers
             }
 
             linha = linhaUpdate;
-
             _ctx.Linha.Attach(linha);
             _ctx.Entry(linha).State = EntityState.Modified;
-            
+
+            _ctx.SaveChanges();
+        }
+        
+        [Route("CadastroLinha")]
+        [HttpPost]
+        public void Post([FromBody] LinhaDto linhaDto)
+        {
+            var linha = new Linha
+            {
+                NumeroLinha = linhaDto.NumeroLinha,
+                NomeLinha = linhaDto.NomeLinha,
+                NumParadas = linhaDto.NumParadas,
+                NumBuracos = linhaDto.NumBuracos,
+                NumLombadas = linhaDto.NumLombadas,
+                NumSemaforo = linhaDto.NumSemaforo,
+                TipoOnibusId = linhaDto.TipoOnibusId
+            };
+
+            _ctx.Add(linha);
             _ctx.SaveChanges();
         }
 

@@ -24,6 +24,7 @@ namespace BusProj.Repository.Entities
         public DbSet<RelatorioLombadas> RelatorioLombada { get; set; }
         public DbSet<RelatorioParadas> RelatorioParada { get; set; }
         public DbSet<RelatorioSemaforos> RelatorioSemaforo { get; set; }
+        public DbSet<TipoOnibus> TipoOnibus { get; set; }
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

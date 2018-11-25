@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using BusCore.Repository.Entities.Model;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace BusProj.Repository.Entities.Model
 {
@@ -13,11 +11,15 @@ namespace BusProj.Repository.Entities.Model
         public string NomeLinha { get; set; }
         public int NumParadas { get; set; }
         public int NumBuracos { get; set; }
-        public int NumLomnbadas { get; set; }
-        public int NumSemnaforo { get; set; }
-        public double Peso { get; set; }
-        public double TotalRPNFabrica { get; set; }
-        public double RPNCalculado { get; set; }
-
+        public int NumLombadas { get; set; }
+        public int NumSemaforo { get; set; }
+        public double TotalRPNFreiosFabrica { get; set; }
+        public double TotalRPNEmbreagemFabrica { get; set; }
+        public double TotalRPNSuspensaoFabrica { get; set; }
+        public double TotalKmFreiosFabrica { get; set; }
+        public double TotalKmEmbreagemFabrica { get; set; }
+        public double TotalKmSuspensaoFabrica { get; set; }
+        public int TipoOnibusId { get; set; }
+        public virtual TipoOnibus TipoOnibus { get; set; }
     }
 }
