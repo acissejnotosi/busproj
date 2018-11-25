@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BusProj.Repository.Entities.Model
 {
@@ -17,13 +14,17 @@ namespace BusProj.Repository.Entities.Model
         public virtual Severidade Severidade { get; set; }
         [ForeignKey("DeteccaoID")]
         public virtual Deteccao Deteccao { get; set; }
-        //Buracos, redutores, carga media
+        // Buracos, redutores, carga media
         [ForeignKey("TipoDescricaoID")]
         public virtual TipoDescricao DescricaoTipo { get; set; }
-        //ocorrecia* severidade * deteccao
+        // ocorrecia* severidade * deteccao
         public int RPNSuspensaoCalculado { get; set; }
+        public int RPNBuraco { get; set; }
+        public int RPNRedutor { get; set; }
+        public int RPNCarga { get; set; }
+        public int RPNKmFabrica { get; set; }
         [ForeignKey("LinhaID")]
-        public virtual Linha LinhaIDCE { get; set; }
+        public virtual Linha Linha { get; set; }
         public DateTime DataHora { get; set; }
     }
 }

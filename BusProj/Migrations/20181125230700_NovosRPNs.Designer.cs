@@ -4,14 +4,16 @@ using BusProj.Repository.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BusCore.Migrations
 {
     [DbContext(typeof(BusCoreContext))]
-    partial class BusCoreContextModelSnapshot : ModelSnapshot
+    [Migration("20181125230700_NovosRPNs")]
+    partial class NovosRPNs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

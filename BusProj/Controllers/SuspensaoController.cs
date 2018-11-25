@@ -1,93 +1,112 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using BusProj.Repository.Entities;
+using BusProj.Repository.Entities.Model;
+using BusCore.Model;
 
 namespace BusCore.Controllers
 {
-    public class SuspensaoController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class SuspensaoController : ControllerBase
     {
-        // GET: RPN
-        public ActionResult Index()
+        private readonly BusCoreContext _context;
+
+        public SuspensaoController(BusCoreContext context)
         {
-            return View();
+            _context = context;
         }
 
-        // GET: RPN/Details/5
-        public ActionResult Details(int id)
+        // GET: api/Suspensao
+        [HttpGet]
+        public IEnumerable<Suspensao> GetSuspensao()
         {
-            return View();
+            return _context.Suspensao;
         }
 
-        // GET: RPN/Create
-        public ActionResult Create()
+        // PUT: api/Suspensao/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutSuspensao([FromRoute] int id, [FromBody] SuspensaoDto suspensaoDto)
         {
-            return View();
-        }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        // POST: RPN/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
+            var suspensao = await _context.Suspensao.FirstOrDefaultAsync(x => x.Linha.LinhaID == id);
+
+            if(suspensao == null)
+            {
+                return BadRequest();
+            }
+
+            suspensao.RPNBuraco = suspensaoDto.RPNBuraco;
+            suspensao.RPNSuspensaoCalculado = suspensaoDto.RPNSuspensaoCalculado;
+            suspensao.RPNRedutor = suspensaoDto.RPNRedutor;
+            suspensao.RPNCarga = suspensaoDto.RPNCarga;
+            suspensao.RPNKmFabrica = suspensaoDto.RPNKmFabrica;
+            
             try
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction(nameof(Index));
+                await _context.SaveChangesAsync();
             }
-            catch
+            catch (DbUpdateConcurrencyException)
             {
-                return View();
+                if (!SuspensaoExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
             }
+
+            return NoContent();
         }
 
-        // GET: RPN/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: RPN/Edit/5
+        // POST: api/Suspensao
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> PostSuspensao([FromBody] Suspensao suspensao)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                // TODO: Add update logic here
+                return BadRequest(ModelState);
+            }
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            _context.Suspensao.Add(suspensao);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetSuspensao", new { id = suspensao.SuspensaoID }, suspensao);
         }
 
-        // GET: RPN/Delete/5
-        public ActionResult Delete(int id)
+        // DELETE: api/Suspensao/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteSuspensao([FromRoute] int id)
         {
-            return View();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var suspensao = await _context.Suspensao.FindAsync(id);
+            if (suspensao == null)
+            {
+                return NotFound();
+            }
+
+            _context.Suspensao.Remove(suspensao);
+            await _context.SaveChangesAsync();
+
+            return Ok(suspensao);
         }
 
-        // POST: RPN/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        private bool SuspensaoExists(int id)
         {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return _context.Suspensao.Any(e => e.SuspensaoID == id);
         }
     }
 }

@@ -21,5 +21,6 @@ namespace BusProj.Repository.Entities.Model
         public double TotalKmSuspensaoFabrica { get; set; }
         public int TipoOnibusId { get; set; }
         public virtual TipoOnibus TipoOnibus { get; set; }
+        public virtual Suspensao Suspensao { get; set; }
     }
 }

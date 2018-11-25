@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BusProj.Repository.Entities.Model
 {
@@ -22,8 +19,11 @@ namespace BusProj.Repository.Entities.Model
         public virtual TipoDescricao DescricaoTipo { get; set; }
         //ocorrecia* severidade * deteccao
         public int RPNEmbreagemCalculado { get; set; }
+        public int RPNParada { get; set; }
+        public int RPNSemaforo { get; set; }
+        public int RPNRedutores { get; set; }
         [ForeignKey("LinhaID")]
-        public virtual Linha LinhaIDCE { get; set; }
+        public virtual Linha Linha { get; set; }
         public DateTime DataHora { get; set; }
     }
 }
