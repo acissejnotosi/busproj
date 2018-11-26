@@ -52,6 +52,7 @@ namespace BusCore.Controllers
         [HttpPost]
         public void Post([FromBody] Linha linha)
         {
+            linha.DataCadastro = DateTime.Now;
             _ctx.Linha.Add(linha);
             _ctx.SaveChanges();
         }

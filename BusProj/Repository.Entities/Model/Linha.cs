@@ -1,4 +1,5 @@
 ﻿using BusCore.Repository.Entities.Model;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace BusProj.Repository.Entities.Model
@@ -7,6 +8,7 @@ namespace BusProj.Repository.Entities.Model
     {
         [Key]
         public int LinhaID { get; set; }
+        public DateTime DataCadastro { get; set; }
         public int NumeroLinha { get; set; }
         public string NomeLinha { get; set; }
         public int NumParadas { get; set; }
