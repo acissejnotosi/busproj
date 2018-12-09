@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BusCore.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -21,27 +21,6 @@ namespace BusCore.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Deteccao", x => x.DetecaoTipoId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Linha",
-                columns: table => new
-                {
-                    LinhaID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    NumeroLinha = table.Column<int>(nullable: false),
-                    NomeLinha = table.Column<string>(nullable: true),
-                    NumParadas = table.Column<int>(nullable: false),
-                    NumBuracos = table.Column<int>(nullable: false),
-                    NumLomnbadas = table.Column<int>(nullable: false),
-                    NumSemnaforo = table.Column<int>(nullable: false),
-                    Peso = table.Column<double>(nullable: false),
-                    TotalRPNFabrica = table.Column<double>(nullable: false),
-                    RPNCalculado = table.Column<double>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Linha", x => x.LinhaID);
                 });
 
             migrationBuilder.CreateTable(
@@ -88,87 +67,49 @@ namespace BusCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "RelatorioBuraco",
+                name: "TipoOnibus",
                 columns: table => new
                 {
-                    RelBuracoID = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    NumBuracos = table.Column<int>(nullable: false),
-                    DataHora = table.Column<DateTime>(nullable: false),
-                    LinhaID = table.Column<int>(nullable: true)
+                    Descricao = table.Column<string>(nullable: true),
+                    Peso = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RelatorioBuraco", x => x.RelBuracoID);
-                    table.ForeignKey(
-                        name: "FK_RelatorioBuraco_Linha_LinhaID",
-                        column: x => x.LinhaID,
-                        principalTable: "Linha",
-                        principalColumn: "LinhaID",
-                        onDelete: ReferentialAction.Restrict);
+                    table.PrimaryKey("PK_TipoOnibus", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "RelatorioLombada",
+                name: "Linha",
                 columns: table => new
                 {
-                    RelLombadaID = table.Column<int>(nullable: false)
+                    LinhaID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    NumLombadas = table.Column<int>(nullable: false),
-                    DataHora = table.Column<DateTime>(nullable: false),
-                    LinhaID = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RelatorioLombada", x => x.RelLombadaID);
-                    table.ForeignKey(
-                        name: "FK_RelatorioLombada_Linha_LinhaID",
-                        column: x => x.LinhaID,
-                        principalTable: "Linha",
-                        principalColumn: "LinhaID",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "RelatorioParada",
-                columns: table => new
-                {
-                    RelParadaID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    DataCadastro = table.Column<DateTime>(nullable: false),
+                    NumeroLinha = table.Column<int>(nullable: false),
+                    NomeLinha = table.Column<string>(nullable: true),
                     NumParadas = table.Column<int>(nullable: false),
-                    DataHora = table.Column<DateTime>(nullable: false),
-                    LinhaID = table.Column<int>(nullable: true)
+                    NumBuracos = table.Column<int>(nullable: false),
+                    NumLombadas = table.Column<int>(nullable: false),
+                    NumSemaforo = table.Column<int>(nullable: false),
+                    TotalRPNFreiosFabrica = table.Column<double>(nullable: false),
+                    TotalRPNEmbreagemFabrica = table.Column<double>(nullable: false),
+                    TotalRPNSuspensaoFabrica = table.Column<double>(nullable: false),
+                    TotalKmFreiosFabrica = table.Column<double>(nullable: false),
+                    TotalKmEmbreagemFabrica = table.Column<double>(nullable: false),
+                    TotalKmSuspensaoFabrica = table.Column<double>(nullable: false),
+                    TipoOnibusId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RelatorioParada", x => x.RelParadaID);
+                    table.PrimaryKey("PK_Linha", x => x.LinhaID);
                     table.ForeignKey(
-                        name: "FK_RelatorioParada_Linha_LinhaID",
-                        column: x => x.LinhaID,
-                        principalTable: "Linha",
-                        principalColumn: "LinhaID",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "RelatorioSemaforo",
-                columns: table => new
-                {
-                    RelSemaforoID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    NumSemaforos = table.Column<int>(nullable: false),
-                    DataHora = table.Column<DateTime>(nullable: false),
-                    LinhaID = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RelatorioSemaforo", x => x.RelSemaforoID);
-                    table.ForeignKey(
-                        name: "FK_RelatorioSemaforo_Linha_LinhaID",
-                        column: x => x.LinhaID,
-                        principalTable: "Linha",
-                        principalColumn: "LinhaID",
-                        onDelete: ReferentialAction.Restrict);
+                        name: "FK_Linha_TipoOnibus_TipoOnibusId",
+                        column: x => x.TipoOnibusId,
+                        principalTable: "TipoOnibus",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -182,6 +123,9 @@ namespace BusCore.Migrations
                     DeteccaoID = table.Column<int>(nullable: true),
                     TipoDescricaoID = table.Column<int>(nullable: true),
                     RPNEmbreagemCalculado = table.Column<int>(nullable: false),
+                    RPNParada = table.Column<int>(nullable: false),
+                    RPNSemaforo = table.Column<int>(nullable: false),
+                    RPNRedutores = table.Column<int>(nullable: false),
                     LinhaID = table.Column<int>(nullable: true),
                     DataHora = table.Column<DateTime>(nullable: false)
                 },
@@ -231,6 +175,9 @@ namespace BusCore.Migrations
                     DeteccaoID = table.Column<int>(nullable: true),
                     TipoDescricaoID = table.Column<int>(nullable: true),
                     RPNFreioCalculado = table.Column<int>(nullable: false),
+                    RPNPontosParada = table.Column<int>(nullable: false),
+                    RPNSemaforo = table.Column<int>(nullable: false),
+                    RPNRedutores = table.Column<int>(nullable: false),
                     LinhaID = table.Column<int>(nullable: true),
                     DataHora = table.Column<DateTime>(nullable: false)
                 },
@@ -280,6 +227,10 @@ namespace BusCore.Migrations
                     DeteccaoID = table.Column<int>(nullable: true),
                     TipoDescricaoID = table.Column<int>(nullable: true),
                     RPNSuspensaoCalculado = table.Column<int>(nullable: false),
+                    RPNBuraco = table.Column<int>(nullable: false),
+                    RPNRedutor = table.Column<int>(nullable: false),
+                    RPNCarga = table.Column<int>(nullable: false),
+                    RPNKmFabrica = table.Column<int>(nullable: false),
                     LinhaID = table.Column<int>(nullable: true),
                     DataHora = table.Column<DateTime>(nullable: false)
                 },
@@ -369,24 +320,9 @@ namespace BusCore.Migrations
                 column: "TipoDescricaoID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RelatorioBuraco_LinhaID",
-                table: "RelatorioBuraco",
-                column: "LinhaID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_RelatorioLombada_LinhaID",
-                table: "RelatorioLombada",
-                column: "LinhaID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_RelatorioParada_LinhaID",
-                table: "RelatorioParada",
-                column: "LinhaID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_RelatorioSemaforo_LinhaID",
-                table: "RelatorioSemaforo",
-                column: "LinhaID");
+                name: "IX_Linha_TipoOnibusId",
+                table: "Linha",
+                column: "TipoOnibusId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Suspensao_DeteccaoID",
@@ -396,7 +332,9 @@ namespace BusCore.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Suspensao_LinhaID",
                 table: "Suspensao",
-                column: "LinhaID");
+                column: "LinhaID",
+                unique: true,
+                filter: "[LinhaID] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Suspensao_OcorrenciaID",
@@ -423,18 +361,6 @@ namespace BusCore.Migrations
                 name: "Freio");
 
             migrationBuilder.DropTable(
-                name: "RelatorioBuraco");
-
-            migrationBuilder.DropTable(
-                name: "RelatorioLombada");
-
-            migrationBuilder.DropTable(
-                name: "RelatorioParada");
-
-            migrationBuilder.DropTable(
-                name: "RelatorioSemaforo");
-
-            migrationBuilder.DropTable(
                 name: "Suspensao");
 
             migrationBuilder.DropTable(
@@ -451,6 +377,9 @@ namespace BusCore.Migrations
 
             migrationBuilder.DropTable(
                 name: "TipoDescricao");
+
+            migrationBuilder.DropTable(
+                name: "TipoOnibus");
         }
     }
 }
