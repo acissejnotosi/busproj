@@ -4,6 +4,8 @@ using BusCore.Repository.Entities.Model;
 using BusProj.Repository.Entities.Model;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using MySql.Data.MySqlClient;
+using MySql.Data.EntityFrameworkCore.Extensions;
 
 namespace BusProj.Repository.Entities
 {
@@ -28,7 +30,7 @@ namespace BusProj.Repository.Entities
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=CIBIEN-PC\\CIBIEN;Initial Catalog=BusCore;Persist Security Info=True;User ID=sa;Password=teste");
+            optionsBuilder.UseMySQL("Server=localhost;Database=buscore;Uid=root;Pwd=teste123;port=3306");
         }
 
 
