@@ -94,14 +94,12 @@ namespace BusProj
                 app.UseHsts();
             }
 
-
-
-            app.UseCors(builder =>
-            {
-                builder.AllowAnyOrigin();
-                builder.AllowAnyMethod();
-                builder.AllowAnyHeader();
-            });
+            //app.UseCors(builder =>
+            //{
+            //    builder.AllowAnyOrigin();
+            //    builder.AllowAnyMethod();
+            //    builder.AllowAnyHeader();
+            //});
 
             app.UseCors("AllowAll");
 

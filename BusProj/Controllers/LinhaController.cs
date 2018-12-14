@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using BusCore.Model;
+using BusCore.ViewModel;
 using BusProj.Repository.Entities;
 using BusProj.Repository.Entities.Model;
 using Microsoft.AspNetCore.Mvc;
@@ -50,11 +51,27 @@ namespace BusCore.Controllers
         }
 
         [HttpPost]
-        public void Post([FromBody] Linha linha)
+        public ActionResult Post([FromBody] LinhaViewModel linha)
         {
-            linha.DataCadastro = DateTime.Now;
-            _ctx.Linha.Add(linha);
+            if (!IsLinhaValid(linha))
+                return BadRequest("Já existe uma linha com esse nome ou número. Por favor verifique e tente novamente");
+
+            var linhaEntity = new Linha()
+            {
+                NumeroLinha = linha.NumeroLinha,
+                NomeLinha = linha.NomeLinha,
+                DataCadastro = DateTime.Now,
+                NumBuracos = linha.NumBuracos,
+                NumLombadas = linha.NumLombadas,
+                NumParadas = linha.NumParadas,
+                NumSemaforo = linha.NumSemaforo,
+                TipoOnibusId = linha.TipoOnibusId
+            };
+
+            _ctx.Linha.Add(linhaEntity);
             _ctx.SaveChanges();
+
+            return CreatedAtAction("Linha", new { id = linhaEntity.LinhaID }, linhaEntity);
         }
 
         [HttpPut("{id}")]
@@ -105,6 +122,17 @@ namespace BusCore.Controllers
 
             _ctx.Linha.Remove(linha);
             _ctx.SaveChanges();
+        }
+
+        private bool IsLinhaValid(LinhaViewModel linha)
+        {
+            var results = _ctx.Linha
+                               .Where(
+                                        x => 
+                                        x.NomeLinha.ToLower().Contains(linha.NomeLinha.ToLower()) || 
+                                        x.NumeroLinha == linha.NumeroLinha).ToList();
+
+            return results.Count == 0;
         }
     }
 }
