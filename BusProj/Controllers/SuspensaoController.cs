@@ -43,11 +43,10 @@ namespace BusCore.Controllers
                 return BadRequest();
             }
 
-            suspensao.RPNBuraco = suspensaoDto.RPNBuraco;
+            suspensao.RPNBuracoCalculado = suspensaoDto.RPNBuraco;
             suspensao.RPNSuspensaoCalculado = suspensaoDto.RPNSuspensaoCalculado;
-            suspensao.RPNRedutor = suspensaoDto.RPNRedutor;
-            suspensao.RPNCarga = suspensaoDto.RPNCarga;
-            suspensao.RPNKmFabrica = suspensaoDto.RPNKmFabrica;
+            suspensao.RPNRedutorCalculado = suspensaoDto.RPNRedutor;
+            suspensao.RPNCargaCalculado = suspensaoDto.RPNCarga;
             
             try
             {

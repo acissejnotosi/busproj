@@ -63,9 +63,9 @@ namespace BusCore.Controllers
             }
 
             embreagem.RPNEmbreagemCalculado = embreagemDto.RPNEmbreagemCalculado;
-            embreagem.RPNParada = embreagemDto.RPNParada;
-            embreagem.RPNSemaforo = embreagemDto.RPNSemaforo;
-            embreagem.RPNRedutores = embreagemDto.RPNRedutores;
+            embreagem.RPNParadaCalculado = embreagemDto.RPNParada;
+            embreagem.RPNSemaforoCalculado = embreagemDto.RPNSemaforo;
+            embreagem.RPNRedutoresCalculado = embreagemDto.RPNRedutores;
 
             try
             {

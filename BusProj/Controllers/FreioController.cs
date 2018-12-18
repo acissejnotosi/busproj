@@ -65,9 +65,9 @@ namespace BusCore.Controllers
             }
 
             freio.RPNFreioCalculado = freioDto.RPNFreioCalculado;
-            freio.RPNPontosParada = freioDto.RPNPontosParada;
-            freio.RPNSemaforo = freioDto.RPNSemaforo;
-            freio.RPNRedutores = freioDto.RPNRedutores;
+            freio.RPNPontosParadaCalculado = freioDto.RPNPontosParada;
+            freio.RPNSemaforoCalculado = freioDto.RPNSemaforo;
+            freio.RPNRedutoresCalculado = freioDto.RPNRedutores;
             
             try
             {

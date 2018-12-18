@@ -23,31 +23,36 @@ namespace BusCore.Controllers
 
         [HttpGet]
         [Route("")]
-        public IEnumerable<Linha> Get()
+        public IEnumerable<LinhaViewModel> Get()
         {
-            var result = _ctx.Linha
-                             .ToList();
+            var result = _ctx.Linha.Select(x => new LinhaViewModel()
+            {
+                LinhaId = x.LinhaID,
+                NomeLinha = x.NomeLinha,
+                NumeroLinha = x.NumeroLinha,
+                TipoOnibusId = x.TipoOnibusId,
+                PesoOnibus = x.TipoOnibus.Peso,
+                TipoOnibusNome = x.TipoOnibus.Descricao
+            }).ToList();
 
             return result;
         }
 
         [HttpGet]
-        [Route("pesquisa")]
-        public IEnumerable<Linha> Get(string search)
+        [Route("GetById")]
+        public LinhaViewModel Get(int id)
         {
-            var numeroLinhaConvertido = 0;
-
-            try
+            var result = _ctx.Linha.Where(x => x.LinhaID == id).Select(x => new LinhaViewModel()
             {
-                numeroLinhaConvertido = Convert.ToInt32(search);
-            }
-            catch (Exception) { }
+                LinhaId = x.LinhaID,
+                NomeLinha = x.NomeLinha,
+                NumeroLinha = x.NumeroLinha,
+                TipoOnibusId = x.TipoOnibusId,
+                PesoOnibus = x.TipoOnibus.Peso,
+                TipoOnibusNome = x.TipoOnibus.Descricao
+            }).ToList();
 
-            var result = _ctx.Linha
-                             .Where(x => x.NomeLinha.ToLower().Contains(search) || (numeroLinhaConvertido > 0 ? x.NumeroLinha == numeroLinhaConvertido : true))
-                             .ToList();
-
-            return result;
+            return result == null ? null : result.First();
         }
 
         [HttpPost]
@@ -60,37 +65,38 @@ namespace BusCore.Controllers
             {
                 NumeroLinha = linha.NumeroLinha,
                 NomeLinha = linha.NomeLinha,
-                DataCadastro = DateTime.Now,
-                NumBuracos = linha.NumBuracos,
-                NumLombadas = linha.NumLombadas,
-                NumParadas = linha.NumParadas,
-                NumSemaforo = linha.NumSemaforo,
-                TipoOnibusId = linha.TipoOnibusId
+                TipoOnibusId = linha.TipoOnibusId,
+                TotalKmEmbreagemFabrica = linha.TotalKmEmbreagemFabrica,
+                TotalKmFreiosFabrica = linha.TotalKmFreiosFabrica,
+                TotalKmSuspensaoFabrica = linha.TotalKmSuspensaoFabrica,
+                TotalRPNEmbreagemFabrica = linha.TotalRPNEmbreagemFabrica,
+                TotalRPNFreiosFabrica = linha.TotalRPNFreiosFabrica,
+                TotalRPNSuspensaoFabrica = linha.TotalRPNSuspensaoFabrica
             };
 
             _ctx.Linha.Add(linhaEntity);
             _ctx.SaveChanges();
 
-            return CreatedAtAction("Linha", new { id = linhaEntity.LinhaID }, linhaEntity);
+            return Ok();
         }
 
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Linha linhaUpdate)
+        [HttpPut]
+        public void Put( [FromBody] Linha linhaUpdate)
         {
-            var linha = _ctx.Linha.Find(id);
+            var linha = _ctx.Linha.Find(linhaUpdate.LinhaID);
 
             if (linha == null)
             {
                 throw new Exception("Linha não encontrada.");
             }
 
-            linha = linhaUpdate;
-            _ctx.Linha.Attach(linha);
-            _ctx.Entry(linha).State = EntityState.Modified;
+            linha.NomeLinha = linhaUpdate.NomeLinha;
+            linha.NumeroLinha = linha.NumeroLinha;
+            linha.TipoOnibusId = linha.TipoOnibusId;
 
             _ctx.SaveChanges();
         }
-        
+
         [Route("CadastroLinha")]
         [HttpPost]
         public void Post([FromBody] LinhaDto linhaDto)
@@ -99,10 +105,6 @@ namespace BusCore.Controllers
             {
                 NumeroLinha = linhaDto.NumeroLinha,
                 NomeLinha = linhaDto.NomeLinha,
-                NumParadas = linhaDto.NumParadas,
-                NumBuracos = linhaDto.NumBuracos,
-                NumLombadas = linhaDto.NumLombadas,
-                NumSemaforo = linhaDto.NumSemaforo,
                 TipoOnibusId = linhaDto.TipoOnibusId
             };
 
@@ -128,8 +130,8 @@ namespace BusCore.Controllers
         {
             var results = _ctx.Linha
                                .Where(
-                                        x => 
-                                        x.NomeLinha.ToLower().Contains(linha.NomeLinha.ToLower()) || 
+                                        x =>
+                                        x.NomeLinha.ToLower().Contains(linha.NomeLinha.ToLower()) ||
                                         x.NumeroLinha == linha.NumeroLinha).ToList();
 
             return results.Count == 0;
