@@ -17,5 +17,14 @@ namespace BusCore.ViewModel
         public double TotalKmFreiosFabrica { get; set; }
         public double TotalKmEmbreagemFabrica { get; set; }
         public double TotalKmSuspensaoFabrica { get; set; }
+        public double RPNSuspensaoBuracoFabrica { get; set; }
+        public double RPNSuspensaoRedutorFabrica { get; set; }
+        public double RPNSuspensaoCargaFabrica { get; set; }
+        public double RPNEmbreagemParadaFabrica { get; set; }
+        public double RPNEmbreagemSemaforoFabrica { get; set; }
+        public double RPNEmbreagemRedutorFabrica { get; set; }
+        public double RPNFreioParadaFabrica { get; set; }
+        public double RPNFreioSemaforoFabrica { get; set; }
+        public double RPNFreioRedutorFabrica { get; set; }
     }
 }

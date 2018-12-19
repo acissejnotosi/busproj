@@ -32,7 +32,19 @@ namespace BusCore.Controllers
                 NumeroLinha = x.NumeroLinha,
                 TipoOnibusId = x.TipoOnibusId,
                 PesoOnibus = x.TipoOnibus.Peso,
-                TipoOnibusNome = x.TipoOnibus.Descricao
+                TipoOnibusNome = x.TipoOnibus.Descricao,
+                TotalKmFreiosFabrica = x.TotalKmFreiosFabrica,
+                TotalKmEmbreagemFabrica = x.TotalKmEmbreagemFabrica,
+                TotalKmSuspensaoFabrica = x.TotalKmSuspensaoFabrica,
+                RPNSuspensaoBuracoFabrica = x.RPNSuspensaoBuracoFabrica,
+                RPNSuspensaoRedutorFabrica = x.RPNSuspensaoRedutorFabrica,
+                RPNSuspensaoCargaFabrica = x.RPNSuspensaoCargaFabrica,
+                RPNEmbreagemParadaFabrica = x.RPNEmbreagemParadaFabrica,
+                RPNEmbreagemSemaforoFabrica = x.RPNEmbreagemSemaforoFabrica,
+                RPNEmbreagemRedutorFabrica = x.RPNEmbreagemRedutorFabrica,
+                RPNFreioParadaFabrica = x.RPNFreioParadaFabrica,
+                RPNFreioSemaforoFabrica = x.RPNFreioSemaforoFabrica,
+                RPNFreioRedutorFabrica = x.RPNFreioRedutorFabrica
             }).ToList();
 
             return result;
@@ -81,7 +93,7 @@ namespace BusCore.Controllers
         }
 
         [HttpPut]
-        public void Put( [FromBody] Linha linhaUpdate)
+        public void Put([FromBody] Linha linhaUpdate)
         {
             var linha = _ctx.Linha.Find(linhaUpdate.LinhaID);
 
@@ -91,8 +103,20 @@ namespace BusCore.Controllers
             }
 
             linha.NomeLinha = linhaUpdate.NomeLinha;
-            linha.NumeroLinha = linha.NumeroLinha;
-            linha.TipoOnibusId = linha.TipoOnibusId;
+            linha.NumeroLinha = linhaUpdate.NumeroLinha;
+            linha.TipoOnibusId = linhaUpdate.TipoOnibusId;
+            linha.TotalKmFreiosFabrica = linhaUpdate.TotalKmFreiosFabrica;
+            linha.TotalKmEmbreagemFabrica = linhaUpdate.TotalKmEmbreagemFabrica;
+            linha.TotalKmSuspensaoFabrica = linhaUpdate.TotalKmSuspensaoFabrica;
+            linha.RPNSuspensaoBuracoFabrica = linhaUpdate.RPNSuspensaoBuracoFabrica;
+            linha.RPNSuspensaoRedutorFabrica = linhaUpdate.RPNSuspensaoRedutorFabrica;
+            linha.RPNSuspensaoCargaFabrica = linhaUpdate.RPNSuspensaoCargaFabrica;
+            linha.RPNEmbreagemParadaFabrica = linhaUpdate.RPNEmbreagemParadaFabrica;
+            linha.RPNEmbreagemSemaforoFabrica = linhaUpdate.RPNEmbreagemSemaforoFabrica;
+            linha.RPNEmbreagemRedutorFabrica = linhaUpdate.RPNEmbreagemRedutorFabrica;
+            linha.RPNFreioParadaFabrica = linhaUpdate.RPNFreioParadaFabrica;
+            linha.RPNFreioSemaforoFabrica = linhaUpdate.RPNFreioSemaforoFabrica;
+            linha.RPNFreioRedutorFabrica = linhaUpdate.RPNFreioRedutorFabrica;
 
             _ctx.SaveChanges();
         }
