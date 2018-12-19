@@ -68,7 +68,7 @@ namespace BusCore.Controllers
             freio.RPNPontosParadaCalculado = freioDto.RPNPontosParada;
             freio.RPNSemaforoCalculado = freioDto.RPNSemaforo;
             freio.RPNRedutoresCalculado = freioDto.RPNRedutores;
-            
+            freio.KmFreioCalculado = freioDto.KmFreioCalculado;
             try
             {
                 await _context.SaveChangesAsync();

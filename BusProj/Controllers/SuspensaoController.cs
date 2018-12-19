@@ -47,6 +47,7 @@ namespace BusCore.Controllers
             suspensao.RPNSuspensaoCalculado = suspensaoDto.RPNSuspensaoCalculado;
             suspensao.RPNRedutorCalculado = suspensaoDto.RPNRedutor;
             suspensao.RPNCargaCalculado = suspensaoDto.RPNCarga;
+            suspensao.KmSuspensaoCalculado = suspensao.KmSuspensaoCalculado;
             
             try
             {

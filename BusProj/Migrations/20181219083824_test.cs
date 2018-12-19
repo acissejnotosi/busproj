@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BusCore.Migrations
 {
-    public partial class inicio : Migration
+    public partial class test : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -121,14 +121,11 @@ namespace BusCore.Migrations
                 {
                     EmbreagemID = table.Column<int>(nullable: false)
                         .Annotation("MySQL:AutoIncrement", true),
-                    OcorrenciaID = table.Column<int>(nullable: true),
-                    SeveridadeID = table.Column<int>(nullable: true),
-                    DeteccaoID = table.Column<int>(nullable: true),
-                    TipoDescricaoID = table.Column<int>(nullable: true),
-                    RPNEmbreagemCalculado = table.Column<int>(nullable: false),
-                    RPNParadaCalculado = table.Column<int>(nullable: false),
-                    RPNSemaforoCalculado = table.Column<int>(nullable: false),
-                    RPNRedutoresCalculado = table.Column<int>(nullable: false),
+                    RPNEmbreagemCalculado = table.Column<double>(nullable: false),
+                    RPNParadaCalculado = table.Column<double>(nullable: false),
+                    RPNSemaforoCalculado = table.Column<double>(nullable: false),
+                    RPNRedutoresCalculado = table.Column<double>(nullable: false),
+                    KmEmbreagemCalculado = table.Column<double>(nullable: false),
                     LinhaID = table.Column<int>(nullable: true),
                     DataHora = table.Column<DateTime>(nullable: false)
                 },
@@ -136,34 +133,10 @@ namespace BusCore.Migrations
                 {
                     table.PrimaryKey("PK_Embreagem", x => x.EmbreagemID);
                     table.ForeignKey(
-                        name: "FK_Embreagem_Deteccao_DeteccaoID",
-                        column: x => x.DeteccaoID,
-                        principalTable: "Deteccao",
-                        principalColumn: "DetecaoTipoId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
                         name: "FK_Embreagem_Linha_LinhaID",
                         column: x => x.LinhaID,
                         principalTable: "Linha",
                         principalColumn: "LinhaID",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Embreagem_Ocorrencia_OcorrenciaID",
-                        column: x => x.OcorrenciaID,
-                        principalTable: "Ocorrencia",
-                        principalColumn: "OcorrenciaId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Embreagem_Severidade_SeveridadeID",
-                        column: x => x.SeveridadeID,
-                        principalTable: "Severidade",
-                        principalColumn: "SeveridadeId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Embreagem_TipoDescricao_TipoDescricaoID",
-                        column: x => x.TipoDescricaoID,
-                        principalTable: "TipoDescricao",
-                        principalColumn: "TipoDescricaoID",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -173,14 +146,11 @@ namespace BusCore.Migrations
                 {
                     FreioID = table.Column<int>(nullable: false)
                         .Annotation("MySQL:AutoIncrement", true),
-                    OcorrenciaID = table.Column<int>(nullable: true),
-                    SeveridadeID = table.Column<int>(nullable: true),
-                    DeteccaoID = table.Column<int>(nullable: true),
-                    TipoDescricaoID = table.Column<int>(nullable: true),
-                    RPNFreioCalculado = table.Column<int>(nullable: false),
-                    RPNPontosParadaCalculado = table.Column<int>(nullable: false),
-                    RPNSemaforoCalculado = table.Column<int>(nullable: false),
-                    RPNRedutoresCalculado = table.Column<int>(nullable: false),
+                    RPNFreioCalculado = table.Column<double>(nullable: false),
+                    RPNPontosParadaCalculado = table.Column<double>(nullable: false),
+                    RPNSemaforoCalculado = table.Column<double>(nullable: false),
+                    RPNRedutoresCalculado = table.Column<double>(nullable: false),
+                    KmFreioCalculado = table.Column<double>(nullable: false),
                     LinhaID = table.Column<int>(nullable: true),
                     DataHora = table.Column<DateTime>(nullable: false)
                 },
@@ -188,34 +158,10 @@ namespace BusCore.Migrations
                 {
                     table.PrimaryKey("PK_Freio", x => x.FreioID);
                     table.ForeignKey(
-                        name: "FK_Freio_Deteccao_DeteccaoID",
-                        column: x => x.DeteccaoID,
-                        principalTable: "Deteccao",
-                        principalColumn: "DetecaoTipoId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
                         name: "FK_Freio_Linha_LinhaID",
                         column: x => x.LinhaID,
                         principalTable: "Linha",
                         principalColumn: "LinhaID",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Freio_Ocorrencia_OcorrenciaID",
-                        column: x => x.OcorrenciaID,
-                        principalTable: "Ocorrencia",
-                        principalColumn: "OcorrenciaId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Freio_Severidade_SeveridadeID",
-                        column: x => x.SeveridadeID,
-                        principalTable: "Severidade",
-                        principalColumn: "SeveridadeId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Freio_TipoDescricao_TipoDescricaoID",
-                        column: x => x.TipoDescricaoID,
-                        principalTable: "TipoDescricao",
-                        principalColumn: "TipoDescricaoID",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -249,14 +195,11 @@ namespace BusCore.Migrations
                 {
                     SuspensaoID = table.Column<int>(nullable: false)
                         .Annotation("MySQL:AutoIncrement", true),
-                    OcorrenciaID = table.Column<int>(nullable: true),
-                    SeveridadeID = table.Column<int>(nullable: true),
-                    DeteccaoID = table.Column<int>(nullable: true),
-                    TipoDescricaoID = table.Column<int>(nullable: true),
-                    RPNSuspensaoCalculado = table.Column<int>(nullable: false),
-                    RPNBuracoCalculado = table.Column<int>(nullable: false),
-                    RPNRedutorCalculado = table.Column<int>(nullable: false),
-                    RPNCargaCalculado = table.Column<int>(nullable: false),
+                    RPNSuspensaoCalculado = table.Column<double>(nullable: false),
+                    RPNBuracoCalculado = table.Column<double>(nullable: false),
+                    RPNRedutorCalculado = table.Column<double>(nullable: false),
+                    RPNCargaCalculado = table.Column<double>(nullable: false),
+                    KmSuspensaoCalculado = table.Column<double>(nullable: false),
                     LinhaID = table.Column<int>(nullable: true),
                     DataHora = table.Column<DateTime>(nullable: false)
                 },
@@ -264,41 +207,12 @@ namespace BusCore.Migrations
                 {
                     table.PrimaryKey("PK_Suspensao", x => x.SuspensaoID);
                     table.ForeignKey(
-                        name: "FK_Suspensao_Deteccao_DeteccaoID",
-                        column: x => x.DeteccaoID,
-                        principalTable: "Deteccao",
-                        principalColumn: "DetecaoTipoId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
                         name: "FK_Suspensao_Linha_LinhaID",
                         column: x => x.LinhaID,
                         principalTable: "Linha",
                         principalColumn: "LinhaID",
                         onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Suspensao_Ocorrencia_OcorrenciaID",
-                        column: x => x.OcorrenciaID,
-                        principalTable: "Ocorrencia",
-                        principalColumn: "OcorrenciaId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Suspensao_Severidade_SeveridadeID",
-                        column: x => x.SeveridadeID,
-                        principalTable: "Severidade",
-                        principalColumn: "SeveridadeId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Suspensao_TipoDescricao_TipoDescricaoID",
-                        column: x => x.TipoDescricaoID,
-                        principalTable: "TipoDescricao",
-                        principalColumn: "TipoDescricaoID",
-                        onDelete: ReferentialAction.Restrict);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Embreagem_DeteccaoID",
-                table: "Embreagem",
-                column: "DeteccaoID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Embreagem_LinhaID",
@@ -306,44 +220,9 @@ namespace BusCore.Migrations
                 column: "LinhaID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Embreagem_OcorrenciaID",
-                table: "Embreagem",
-                column: "OcorrenciaID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Embreagem_SeveridadeID",
-                table: "Embreagem",
-                column: "SeveridadeID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Embreagem_TipoDescricaoID",
-                table: "Embreagem",
-                column: "TipoDescricaoID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Freio_DeteccaoID",
-                table: "Freio",
-                column: "DeteccaoID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Freio_LinhaID",
                 table: "Freio",
                 column: "LinhaID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Freio_OcorrenciaID",
-                table: "Freio",
-                column: "OcorrenciaID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Freio_SeveridadeID",
-                table: "Freio",
-                column: "SeveridadeID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Freio_TipoDescricaoID",
-                table: "Freio",
-                column: "TipoDescricaoID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_HistoricoLinha_LinhaID",
@@ -356,33 +235,16 @@ namespace BusCore.Migrations
                 column: "TipoOnibusId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Suspensao_DeteccaoID",
-                table: "Suspensao",
-                column: "DeteccaoID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Suspensao_LinhaID",
                 table: "Suspensao",
                 column: "LinhaID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Suspensao_OcorrenciaID",
-                table: "Suspensao",
-                column: "OcorrenciaID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Suspensao_SeveridadeID",
-                table: "Suspensao",
-                column: "SeveridadeID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Suspensao_TipoDescricaoID",
-                table: "Suspensao",
-                column: "TipoDescricaoID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Deteccao");
+
             migrationBuilder.DropTable(
                 name: "Embreagem");
 
@@ -393,22 +255,19 @@ namespace BusCore.Migrations
                 name: "HistoricoLinha");
 
             migrationBuilder.DropTable(
-                name: "Suspensao");
-
-            migrationBuilder.DropTable(
-                name: "Deteccao");
-
-            migrationBuilder.DropTable(
-                name: "Linha");
-
-            migrationBuilder.DropTable(
                 name: "Ocorrencia");
 
             migrationBuilder.DropTable(
                 name: "Severidade");
 
             migrationBuilder.DropTable(
+                name: "Suspensao");
+
+            migrationBuilder.DropTable(
                 name: "TipoDescricao");
+
+            migrationBuilder.DropTable(
+                name: "Linha");
 
             migrationBuilder.DropTable(
                 name: "TipoOnibus");

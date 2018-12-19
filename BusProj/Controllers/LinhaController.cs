@@ -61,8 +61,23 @@ namespace BusCore.Controllers
                 NumeroLinha = x.NumeroLinha,
                 TipoOnibusId = x.TipoOnibusId,
                 PesoOnibus = x.TipoOnibus.Peso,
-                TipoOnibusNome = x.TipoOnibus.Descricao
-            }).ToList();
+                TipoOnibusNome = x.TipoOnibus.Descricao,
+                TotalKmFreiosFabrica = x.TotalKmFreiosFabrica,
+                TotalKmEmbreagemFabrica = x.TotalKmEmbreagemFabrica,
+                TotalKmSuspensaoFabrica = x.TotalKmSuspensaoFabrica,
+                RPNSuspensaoBuracoFabrica = x.RPNSuspensaoBuracoFabrica,
+                RPNSuspensaoRedutorFabrica = x.RPNSuspensaoRedutorFabrica,
+                RPNSuspensaoCargaFabrica = x.RPNSuspensaoCargaFabrica,
+                RPNEmbreagemParadaFabrica = x.RPNEmbreagemParadaFabrica,
+                RPNEmbreagemSemaforoFabrica = x.RPNEmbreagemSemaforoFabrica,
+                RPNEmbreagemRedutorFabrica = x.RPNEmbreagemRedutorFabrica,
+                RPNFreioParadaFabrica = x.RPNFreioParadaFabrica,
+                RPNFreioSemaforoFabrica = x.RPNFreioSemaforoFabrica,
+                RPNFreioRedutorFabrica = x.RPNFreioRedutorFabrica,
+                TotalRPNEmbreagemFabrica = x.TotalRPNEmbreagemFabrica,
+                TotalRPNFreiosFabrica = x.TotalRPNFreiosFabrica,
+                TotalRPNSuspensaoFabrica = x.TotalRPNSuspensaoFabrica
+        }).ToList();
 
             return result == null ? null : result.First();
         }
@@ -117,6 +132,9 @@ namespace BusCore.Controllers
             linha.RPNFreioParadaFabrica = linhaUpdate.RPNFreioParadaFabrica;
             linha.RPNFreioSemaforoFabrica = linhaUpdate.RPNFreioSemaforoFabrica;
             linha.RPNFreioRedutorFabrica = linhaUpdate.RPNFreioRedutorFabrica;
+            linha.TotalRPNEmbreagemFabrica = linhaUpdate.TotalRPNEmbreagemFabrica;
+            linha.TotalRPNFreiosFabrica = linhaUpdate.TotalRPNFreiosFabrica;
+            linha.TotalRPNSuspensaoFabrica = linhaUpdate.TotalRPNSuspensaoFabrica;
 
             _ctx.SaveChanges();
         }

@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BusCore.Migrations
 {
     [DbContext(typeof(BusCoreContext))]
-    [Migration("20181218215337_inicio")]
-    partial class inicio
+    [Migration("20181219083824_test")]
+    partial class test
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -79,35 +79,21 @@ namespace BusCore.Migrations
 
                     b.Property<DateTime>("DataHora");
 
-                    b.Property<int?>("DeteccaoID");
+                    b.Property<double>("KmEmbreagemCalculado");
 
                     b.Property<int?>("LinhaID");
 
-                    b.Property<int?>("OcorrenciaID");
+                    b.Property<double>("RPNEmbreagemCalculado");
 
-                    b.Property<int>("RPNEmbreagemCalculado");
+                    b.Property<double>("RPNParadaCalculado");
 
-                    b.Property<int>("RPNParadaCalculado");
+                    b.Property<double>("RPNRedutoresCalculado");
 
-                    b.Property<int>("RPNRedutoresCalculado");
-
-                    b.Property<int>("RPNSemaforoCalculado");
-
-                    b.Property<int?>("SeveridadeID");
-
-                    b.Property<int?>("TipoDescricaoID");
+                    b.Property<double>("RPNSemaforoCalculado");
 
                     b.HasKey("EmbreagemID");
 
-                    b.HasIndex("DeteccaoID");
-
                     b.HasIndex("LinhaID");
-
-                    b.HasIndex("OcorrenciaID");
-
-                    b.HasIndex("SeveridadeID");
-
-                    b.HasIndex("TipoDescricaoID");
 
                     b.ToTable("Embreagem");
                 });
@@ -119,35 +105,21 @@ namespace BusCore.Migrations
 
                     b.Property<DateTime>("DataHora");
 
-                    b.Property<int?>("DeteccaoID");
+                    b.Property<double>("KmFreioCalculado");
 
                     b.Property<int?>("LinhaID");
 
-                    b.Property<int?>("OcorrenciaID");
+                    b.Property<double>("RPNFreioCalculado");
 
-                    b.Property<int>("RPNFreioCalculado");
+                    b.Property<double>("RPNPontosParadaCalculado");
 
-                    b.Property<int>("RPNPontosParadaCalculado");
+                    b.Property<double>("RPNRedutoresCalculado");
 
-                    b.Property<int>("RPNRedutoresCalculado");
-
-                    b.Property<int>("RPNSemaforoCalculado");
-
-                    b.Property<int?>("SeveridadeID");
-
-                    b.Property<int?>("TipoDescricaoID");
+                    b.Property<double>("RPNSemaforoCalculado");
 
                     b.HasKey("FreioID");
 
-                    b.HasIndex("DeteccaoID");
-
                     b.HasIndex("LinhaID");
-
-                    b.HasIndex("OcorrenciaID");
-
-                    b.HasIndex("SeveridadeID");
-
-                    b.HasIndex("TipoDescricaoID");
 
                     b.ToTable("Freio");
                 });
@@ -239,35 +211,21 @@ namespace BusCore.Migrations
 
                     b.Property<DateTime>("DataHora");
 
-                    b.Property<int?>("DeteccaoID");
+                    b.Property<double>("KmSuspensaoCalculado");
 
                     b.Property<int?>("LinhaID");
 
-                    b.Property<int?>("OcorrenciaID");
+                    b.Property<double>("RPNBuracoCalculado");
 
-                    b.Property<int>("RPNBuracoCalculado");
+                    b.Property<double>("RPNCargaCalculado");
 
-                    b.Property<int>("RPNCargaCalculado");
+                    b.Property<double>("RPNRedutorCalculado");
 
-                    b.Property<int>("RPNRedutorCalculado");
-
-                    b.Property<int>("RPNSuspensaoCalculado");
-
-                    b.Property<int?>("SeveridadeID");
-
-                    b.Property<int?>("TipoDescricaoID");
+                    b.Property<double>("RPNSuspensaoCalculado");
 
                     b.HasKey("SuspensaoID");
 
-                    b.HasIndex("DeteccaoID");
-
                     b.HasIndex("LinhaID");
-
-                    b.HasIndex("OcorrenciaID");
-
-                    b.HasIndex("SeveridadeID");
-
-                    b.HasIndex("TipoDescricaoID");
 
                     b.ToTable("Suspensao");
                 });
@@ -293,48 +251,16 @@ namespace BusCore.Migrations
 
             modelBuilder.Entity("BusProj.Repository.Entities.Model.Embreagem", b =>
                 {
-                    b.HasOne("BusProj.Repository.Entities.Model.Deteccao", "Deteccao")
-                        .WithMany()
-                        .HasForeignKey("DeteccaoID");
-
                     b.HasOne("BusProj.Repository.Entities.Model.Linha", "Linha")
                         .WithMany()
                         .HasForeignKey("LinhaID");
-
-                    b.HasOne("BusProj.Repository.Entities.Model.Ocorrencia", "Ocorrencia")
-                        .WithMany()
-                        .HasForeignKey("OcorrenciaID");
-
-                    b.HasOne("BusProj.Repository.Entities.Model.Severidade", "Severidade")
-                        .WithMany()
-                        .HasForeignKey("SeveridadeID");
-
-                    b.HasOne("BusProj.Repository.Entities.Model.TipoDescricao", "DescricaoTipo")
-                        .WithMany()
-                        .HasForeignKey("TipoDescricaoID");
                 });
 
             modelBuilder.Entity("BusProj.Repository.Entities.Model.Freio", b =>
                 {
-                    b.HasOne("BusProj.Repository.Entities.Model.Deteccao", "Deteccao")
-                        .WithMany()
-                        .HasForeignKey("DeteccaoID");
-
                     b.HasOne("BusProj.Repository.Entities.Model.Linha", "Linha")
                         .WithMany()
                         .HasForeignKey("LinhaID");
-
-                    b.HasOne("BusProj.Repository.Entities.Model.Ocorrencia", "Ocorrencia")
-                        .WithMany()
-                        .HasForeignKey("OcorrenciaID");
-
-                    b.HasOne("BusProj.Repository.Entities.Model.Severidade", "Severidade")
-                        .WithMany()
-                        .HasForeignKey("SeveridadeID");
-
-                    b.HasOne("BusProj.Repository.Entities.Model.TipoDescricao", "DescricaoTipo")
-                        .WithMany()
-                        .HasForeignKey("TipoDescricaoID");
                 });
 
             modelBuilder.Entity("BusProj.Repository.Entities.Model.Linha", b =>
@@ -347,25 +273,9 @@ namespace BusCore.Migrations
 
             modelBuilder.Entity("BusProj.Repository.Entities.Model.Suspensao", b =>
                 {
-                    b.HasOne("BusProj.Repository.Entities.Model.Deteccao", "Deteccao")
-                        .WithMany()
-                        .HasForeignKey("DeteccaoID");
-
                     b.HasOne("BusProj.Repository.Entities.Model.Linha", "Linha")
                         .WithMany()
                         .HasForeignKey("LinhaID");
-
-                    b.HasOne("BusProj.Repository.Entities.Model.Ocorrencia", "Ocorrencia")
-                        .WithMany()
-                        .HasForeignKey("OcorrenciaID");
-
-                    b.HasOne("BusProj.Repository.Entities.Model.Severidade", "Severidade")
-                        .WithMany()
-                        .HasForeignKey("SeveridadeID");
-
-                    b.HasOne("BusProj.Repository.Entities.Model.TipoDescricao", "DescricaoTipo")
-                        .WithMany()
-                        .HasForeignKey("TipoDescricaoID");
                 });
 #pragma warning restore 612, 618
         }

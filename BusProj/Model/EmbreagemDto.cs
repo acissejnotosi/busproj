@@ -2,9 +2,11 @@
 {
     public class EmbreagemDto
     {
-        public int RPNEmbreagemCalculado { get; set; }
-        public int RPNParada { get; set; }
-        public int RPNSemaforo { get; set; }
-        public int RPNRedutores { get; set; }
+        public double RPNEmbreagemCalculado { get; set; }
+        public double RPNParada { get; set; }
+        public double RPNSemaforo { get; set; }
+        public double RPNRedutor { get; set; }
+        public double KmEmbreagemCalculado { get; set; }
+        public int LinhaID { get; set; }
     }
 }
