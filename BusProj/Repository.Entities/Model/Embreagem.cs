@@ -14,7 +14,8 @@ namespace BusProj.Repository.Entities.Model
         public double RPNSemaforoCalculado { get; set; }
         public double RPNRedutoresCalculado { get; set; }
         public double KmEmbreagemCalculado { get; set; }
-        [ForeignKey("LinhaID")]
+        public int LinhaId { get; set; }
+       
         public virtual Linha Linha { get; set; }
         public DateTime DataHora { get; set; }
     }

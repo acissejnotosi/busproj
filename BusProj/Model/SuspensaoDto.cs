@@ -7,6 +7,6 @@
         public double RPNRedutor { get; set; }
         public double RPNCarga { get; set; }
         public double RPNKmFabrica { get; set; }
-        public int linhaID { get; set; }
+        public int LinhaID { get; set; }
     }
 }

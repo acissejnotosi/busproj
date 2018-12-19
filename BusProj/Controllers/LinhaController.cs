@@ -44,7 +44,10 @@ namespace BusCore.Controllers
                 RPNEmbreagemRedutorFabrica = x.RPNEmbreagemRedutorFabrica,
                 RPNFreioParadaFabrica = x.RPNFreioParadaFabrica,
                 RPNFreioSemaforoFabrica = x.RPNFreioSemaforoFabrica,
-                RPNFreioRedutorFabrica = x.RPNFreioRedutorFabrica
+                RPNFreioRedutorFabrica = x.RPNFreioRedutorFabrica,
+                TotalRPNEmbreagemFabrica = x.TotalRPNEmbreagemFabrica,
+                TotalRPNFreiosFabrica = x.TotalRPNFreiosFabrica,
+                TotalRPNSuspensaoFabrica = x.TotalRPNSuspensaoFabrica
             }).ToList();
 
             return result;

@@ -90,17 +90,27 @@ namespace BusCore.Controllers
 
         // POST: api/Embreagem
         [HttpPost]
-        public async Task<IActionResult> PostEmbreagem([FromBody] Embreagem embreagem)
+        public async Task<IActionResult> PostEmbreagem([FromBody] EmbreagemDto embreagem)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.Embreagem.Add(embreagem);
+            var entityEmbreagem = new Embreagem()
+            {
+                DataHora = System.DateTime.Now,
+                KmEmbreagemCalculado = embreagem.KmEmbreagemCalculado,
+                RPNEmbreagemCalculado = embreagem.RPNEmbreagemCalculado,
+                RPNParadaCalculado = embreagem.RPNParada,
+                RPNRedutoresCalculado = embreagem.RPNRedutor,
+                RPNSemaforoCalculado = embreagem.RPNSemaforo,
+                LinhaId = embreagem.LinhaID
+            };
+            _context.Embreagem.Add(entityEmbreagem);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetEmbreagem", new { id = embreagem.EmbreagemID }, embreagem);
+            return CreatedAtAction("GetEmbreagem", new { id = entityEmbreagem.EmbreagemID }, entityEmbreagem);
         }
 
         // DELETE: api/Embreagem/5

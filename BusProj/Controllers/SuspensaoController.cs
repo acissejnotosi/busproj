@@ -70,17 +70,28 @@ namespace BusCore.Controllers
 
         // POST: api/Suspensao
         [HttpPost]
-        public async Task<IActionResult> PostSuspensao([FromBody] Suspensao suspensao)
+        public async Task<IActionResult> PostSuspensao([FromBody] SuspensaoDto suspensao)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.Suspensao.Add(suspensao);
+            var suspensaoEntity = new Suspensao()
+            {
+                RPNSuspensaoCalculado = suspensao.RPNSuspensaoCalculado,
+                RPNBuracoCalculado = suspensao.RPNBuraco,
+                RPNCargaCalculado = suspensao.RPNCarga,
+                RPNRedutorCalculado = suspensao.RPNRedutor,
+                KmSuspensaoCalculado = suspensao.RPNKmFabrica,
+                LinhaId = suspensao.LinhaID,
+                DataHora = System.DateTime.Now
+            };
+
+            _context.Suspensao.Add(suspensaoEntity);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetSuspensao", new { id = suspensao.SuspensaoID }, suspensao);
+            return CreatedAtAction("GetSuspensao", new { id = suspensaoEntity.SuspensaoID }, suspensaoEntity);
         }
 
         // DELETE: api/Suspensao/5

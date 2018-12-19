@@ -90,17 +90,27 @@ namespace BusCore.Controllers
 
         // POST: api/Freio
         [HttpPost]
-        public async Task<IActionResult> PostFreio([FromBody] Freio freio)
+        public async Task<IActionResult> PostFreio([FromBody] FreioDto freio)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.Freio.Add(freio);
+            var entityFreio = new Freio()
+            {
+                DataHora = System.DateTime.Now,
+                KmFreioCalculado = freio.KmFreioCalculado,
+                LinhaId = freio.LinhaID,
+                RPNFreioCalculado = freio.RPNFreioCalculado,
+                RPNPontosParadaCalculado = freio.RPNPontosParada,
+                 RPNRedutoresCalculado = freio.RPNRedutores,
+                 RPNSemaforoCalculado = freio.RPNSemaforo
+            };
+            _context.Freio.Add(entityFreio);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetFreio", new { id = freio.FreioID }, freio);
+            return CreatedAtAction("GetFreio", new { id = entityFreio.FreioID }, entityFreio);
         }
 
         // DELETE: api/Freio/5
